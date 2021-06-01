@@ -1,7 +1,5 @@
-<script src="./json-ld.vue.js"></script>
-<style src="./json-ld.vue.css"></style>
 <template>
-  <div id="comp">
+  <div class="comp">
     <div v-if="!message" class="message valid">
       <span class="button" v-on:click="formatInput()">Format</span>
       <strong>Tip:</strong> Use JSON with a <a href="https://json-ld.org">JSON-LD</a> context, e.g.:
@@ -12,32 +10,31 @@
     </div>
     <!-- TOOLBAR -->
     <fieldset class="toolbar">
-      <input type="radio" id="compacted" value="compacted" v-model="mode" ><label v-bind:class="{ active: mode == 'compacted'}" for="compacted">Compacted</label>
-      <input type="radio" id="expanded" value="expanded" v-model="mode"   ><label v-bind:class="{ active: mode == 'expanded'}" for="expanded">Expanded</label>
-      <input type="radio" id="flattened" value="flattened" v-model="mode" ><label v-bind:class="{ active: mode == 'flattened'}" for="flattened">Flattened</label>
-      <input type="radio" id="rdf" value="rdf" v-model="mode"             ><label v-bind:class="{ active: mode == 'rdf'}" for="rdf">RDF Triples</label>
-      <input type="radio" id="framed" value="framed" v-model="mode"       ><label v-bind:class="{ active: mode == 'framed'}" for="framed">Framed (Data Integration)</label>
+      <input type="radio" :id="id('compacted')" value="compacted" v-model="view"><label v-bind:class="{ active: view == 'compacted'}" :for="id('compacted')">Compacted</label>
+      <input type="radio" :id="id('expanded')"  value="expanded"  v-model="view"><label v-bind:class="{ active: view == 'expanded'}"  :for="id('expanded')" >Expanded</label>
+      <input type="radio" :id="id('flattened')" value="flattened" v-model="view"><label v-bind:class="{ active: view == 'flattened'}" :for="id('flattened')">Flattened</label>
+      <input type="radio" :id="id('rdf')"       value="rdf"       v-model="view"><label v-bind:class="{ active: view == 'rdf'}"       :for="id('rdf')"      >RDF Triples</label>
+      <input type="radio" :id="id('framed')"    value="framed"    v-model="view"><label v-bind:class="{ active: view == 'framed'}"    :for="id('framed')"   >Framed (Data Integration)</label>
       <span class="separator"></span>
       <span class="right">
-        <input type="radio" id="rows" value="rows" v-model="layout"><label for="rows" v-bind:class="{ active: layout == 'rows'}">Rows</label>
-        <input type="radio" id="cols" value="cols" v-model="layout"><label for="cols" v-bind:class="{ active: layout == 'cols'}">Columns</label>
+        <input type="radio" :id="id('rows')"value="rows" v-model="layout"><label :for="id('rows')"v-bind:class="{ active: layout == 'rows'}">Rows</label>
+        <input type="radio" :id="id('cols')"value="cols" v-model="layout"><label :for="id('cols')"v-bind:class="{ active: layout == 'cols'}">Columns</label>
       </span>
     </fieldset>
     <!-- 2x1 GRID -->
-    <div v-if="mode != 'framed'" class="form layout" v-bind:class="{
-        rows:    layout == 'rows' && mode != 'rdf',
-        columns: layout == 'cols' || mode == 'rdf'
+    <div v-if="view!= 'framed'" class="form layout" v-bind:class="{
+        rows:    layout == 'rows' && view!= 'rdf',
+        columns: layout == 'cols' || view== 'rdf'
     }">
       <div class="cell">
-        <label for="jsonldInput">{{$attrs.data || "Datasource 1"}}</label>
-        <textarea id="jsonldInput" name="value" autocomplete="true" v-model="jsonldInput"></textarea>
+        <label :for="id('jsonldInput')">{{inputLabel}}</label>
+        <textarea :id="id('jsonldInput')"name="value" autocomplete="true" v-model="jsonldInput"></textarea>
       </div>
       <div class="cell">
-        <label for="jsonldProcessed">Output</label>
-        <textarea id="jsonldProcessed" name="jsonld" autocomplete="true" wrap="off" readonly
-          :value="jsonldProcessed"></textarea>
+        <label :for="id('output')">Output</label>
+        <textarea :id="id('output')" :value="output" name="jsonld" autocomplete="true" wrap="off" readonly></textarea>
       </div>
-      <div class="cell2" v-if="mode == 'rdf'">
+      <div class="cell2" v-if="view== 'rdf'">
         <table>
           <tr>
             <th>Subject<br />(@base + @id)</th>
@@ -57,22 +54,22 @@
       </div>
     </div>
     <!-- 4x4 GRID -->
-    <div v-else="mode == 'framed'" class="form layout columns">
+    <div v-else="view== 'framed'" class="form layout columns">
       <div class="cell">
-        <label for="jsonldInput">{{$attrs.data || "Datasource 1"}}</label>
-        <textarea id="jsonldInput" name="value" v-model="jsonldInput"></textarea>
+        <label :for="id('jsonldInput')">{{inputLabel}}</label>
+        <textarea :id="id('jsonldInput')"name="value" v-model="jsonldInput"></textarea>
       </div>
       <div class="cell">
-        <label for="jsonldFrame">{{$attrs.frame || "JSON-LD Frame (Matching & Mapping)"}}</label>
-        <textarea id="jsonldFrame" name="frame" v-model="jsonldFrame"></textarea>
+        <label :for="id('jsonldFrame')">{{frameLabel}}</label>
+        <textarea :id="id('jsonldFrame')"name="frame" v-model="jsonldFrame"></textarea>
       </div>
       <div class="cell">
-        <label for="jsonldInput2">{{$attrs.data2 || "Datasource 2 (Optional)"}}</label>
-        <textarea id="jsonldInput2" name="value" v-model="jsonldInput2"></textarea>
+        <label :for="id('jsonldInput2')">{{inputLabel2}}</label>
+        <textarea :id="id('jsonldInput2')" name="value" v-model="jsonldInput2"></textarea>
       </div>
       <div class="cell">
-        <label for="jsonldProcessed">{{$attrs.framed || "Output"}}</label>
-        <textarea id="jsonldProcessed" name="jsonld" wrap="off" readonly :value="jsonldProcessed"></textarea>
+        <label :for="id('output')">{{outputLabel}}</label>
+        <textarea :id="id('output')"name="jsonld" wrap="off" readonly :value="output"></textarea>
       </div>
     </div>
     <!-- FOOTER -->
@@ -88,3 +85,5 @@
     </div>
   </div>
 </template>
+<script src="./json-ld.vue.js"></script>
+<style src="./json-ld.vue.css"></style>
