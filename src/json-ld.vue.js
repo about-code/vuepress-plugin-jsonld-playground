@@ -1,9 +1,6 @@
 const jsonld = require("jsonld");
 const _ = require("lodash");
 
-const DATA_TITLE  = "Datasource";
-const DATA2_TITLE = "Datasource 2";
-const FRAME_TITLE = "JSON-LD Frame";
 module.exports = {
   props: {
     "view": {
@@ -78,15 +75,15 @@ module.exports = {
     },
     formatInput: function () {
       const my        = this;
-      my.jsonldInput  = my.locateErr(my.$attrs.doc   || DATA_TITLE,  () => JSON.stringify(JSON.parse(my.jsonldInput), null, 2));
-      my.jsonldInput2 = my.locateErr(my.$attrs.doc2  || DATA2_TITLE, () => JSON.stringify(JSON.parse(my.jsonldInput2), null, 2));
-      my.jsonldFrame  = my.locateErr(my.$attrs.frame || FRAME_TITLE, () => JSON.stringify(JSON.parse(my.jsonldFrame), null, 2));
+      my.jsonldInput  = my.locateErr(my.$props.inputLabel , () => JSON.stringify(JSON.parse(my.jsonldInput), null, 2));
+      my.jsonldInput2 = my.locateErr(my.$props.inputLabel2, () => JSON.stringify(JSON.parse(my.jsonldInput2), null, 2));
+      my.jsonldFrame  = my.locateErr(my.$props.frameLabel , () => JSON.stringify(JSON.parse(my.jsonldFrame), null, 2));
     },
     formatOutput: function () {
       const my        = this;
-      const input     = my.locateErr(my.$attrs.doc  || DATA_TITLE , () => JSON.parse(my.jsonldInput));
-      const input2    = my.locateErr(my.$attrs.doc2 || DATA2_TITLE, () => JSON.parse(my.jsonldInput2));
-      const frame     = my.locateErr(my.$attrs.frame || FRAME_TITLE, () => JSON.parse(my.jsonldFrame));
+      const input     = my.locateErr(my.$props.inputLabel , () => JSON.parse(my.jsonldInput));
+      const input2    = my.locateErr(my.$props.inputLabel2, () => JSON.parse(my.jsonldInput2));
+      const frame     = my.locateErr(my.$props.frameLabel , () => JSON.parse(my.jsonldFrame));
       let result;
       switch(my.view) {
         case "rdf":
