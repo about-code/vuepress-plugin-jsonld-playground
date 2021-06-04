@@ -19,7 +19,7 @@ module.exports = {
 
 
 *document.md*
-~~~md
+~~~xml
 Some markdown text or some html markup
 <json-ld>
 {
@@ -49,19 +49,19 @@ You may use the `<json-ld>` element with the following attributes like `<element
 - `frameLabel`  to change the default label for editable *frame* text area
   - Default: `"JSON-LD Frame (Matching & Mapping)"`
 
-> **Important:** For some yet to be understood reason `<json-ld>` cannot be the first element of a new paragraph.
+> **Note:** For some yet to be understood reason `<json-ld>` can not be the first element of a new paragraph.
 >
 > ~~~md
 > Some text
->          <-- Entering a new Markdown paragraph doesn't work.
+>               <-- Doesn't work.
 > <json-ld>
 > ...
 > ~~~
 >
 > ~~~md
 > Some text
->          <-- Works when prepending HTML or text.
-> <span></span>
+>               <-- Works because of --.
+> <span></span> <----------------------'
 > <json-ld>
 > ...
 > ~~~
@@ -69,7 +69,7 @@ You may use the `<json-ld>` element with the following attributes like `<element
 ## Advanced Uses
 
 ### Framing
-~~~md
+~~~xml
 <json-ld view="framed">
 {
     "@context": {
@@ -92,17 +92,9 @@ You may use the `<json-ld>` element with the following attributes like `<element
 
 ### Framing two Datasources
 
-In *framed* view we can provide a second JSON-LD document. Then the component internally combines both input documents and expands them into a single JSON-LD graph before applying the given Frame to the combined data graph:
+In *framed* view we can provide a second JSON-LD document. This option aims to demonstrate a data integration scenario which involves more than one data source:
 
-~~~js
-jsonld
-   .expand([input, input2])
-   .then( expanded => jsonld.frame(expanded, frame, { embed: "@always" }) );
-~~~
-
-This option aims at demonstrating a data integration scenario which involves more than one data source.
-
-~~~md
+~~~xml
 <json-ld view="framed">
 {
     "@context": {
@@ -130,4 +122,14 @@ This option aims at demonstrating a data integration scenario which involves mor
 }
 </template>
 </json-ld>
+~~~
+
+Internally the component combines both input documents and expands them into a single JSON-LD graph before applying the given JSON-LD frame to the combined data graph like so:
+
+~~~js
+jsonld.expand([input, input2]).then(expanded => {
+    return jsonld.frame(expanded, frame, {
+        embed: "@always"
+    });
+});
 ~~~
