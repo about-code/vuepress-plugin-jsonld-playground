@@ -1,6 +1,6 @@
 {
   "name": "vuepress-plugin-jsonld-playground",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A JSON-LD Playground component for vuepress (v1) and vuejs (v2).",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/about-code/vue-jsonld-playground.git"
+    "url": "git+https://github.com/about-code/vuepress-plugin-jsonld-playground.git"
   },
   "dependencies": {
     "jsonld": "^5.2.0"
@@ -17,6 +17,12 @@
     "vue": "^2.1.0",
     "vuepress": "^v1.0.0"
   },
+  "files": [
+    "src",
+    "index.js",
+    "package.json",
+    "README.md"
+  ],
   "keywords": [
     "vuepress",
     "json-ld",
