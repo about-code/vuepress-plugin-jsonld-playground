@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.0.2](https://github.com/about-code/vuepress-plugin-jsonld-playground/compare/v1.0.0...v1.0.2) (2021-08-22)
+
+### Bug Fixes
+
+* Fix homepage URL.
+
 ## [v1.0.1](https://github.com/about-code/vuepress-plugin-jsonld-playground/compare/v1.0.0...v1.0.1) (2021-08-22)
 
 ### Bug Fixes
