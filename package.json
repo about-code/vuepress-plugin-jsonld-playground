@@ -35,7 +35,7 @@
   "author": "Andreas Martin",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/about-code/vue-jsonld-playground/issues"
+    "url": "https://github.com/about-code/vuepress-plugin-jsonld-playground/issues"
   },
-  "homepage": "https://github.com/about-code/vue-jsonld-playground#readme"
+  "homepage": "https://github.com/about-code/vuepress-plugin-jsonld-playground#readme"
 }
