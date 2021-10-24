@@ -91,7 +91,7 @@ module.exports = {
           result.then(rdf => this.rdfStatements = rdf);
           break;
         case "expanded":  result = jsonld.expand(input); break;
-        case "flattened": result = jsonld.flatten(input, input); break;
+        case "flattened": result = jsonld.flatten(input, null); break;
         case "framed":
           result = jsonld
             .expand([input, input2])
