@@ -26,6 +26,7 @@
 }
 .cell2 {
   grid-column: span 2;
+  overflow-x: scroll;
 }
 .footer {
   font-size: 0.8rem;
@@ -129,7 +130,6 @@ textarea:read-only {
   width: 100%;
   margin: 0px;
   font-size: 0.8rem;
-  overflow-x: scroll;
   border-bottom: 1px solid #AAA;
   background: white;
 }
