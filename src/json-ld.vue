@@ -16,19 +16,19 @@
       <input type="radio" :id="id('rdf')"       value="rdf"       v-model="view"><label v-bind:class="{ active: view == 'rdf'}"       :for="id('rdf')"      >RDF Triples</label>
       <input type="radio" :id="id('framed')"    value="framed"    v-model="view"><label v-bind:class="{ active: view == 'framed'}"    :for="id('framed')"   >Framed (Data Integration)</label>
       <span class="separator"></span>
-      <span class="right">
-        <input type="radio" :id="id('rows')"value="rows" v-model="layout"><label :for="id('rows')"v-bind:class="{ active: layout == 'rows'}">Rows</label>
-        <input type="radio" :id="id('cols')"value="cols" v-model="layout"><label :for="id('cols')"v-bind:class="{ active: layout == 'cols'}">Columns</label>
+      <span class="right" v-if="view!='framed' && view!='rdf'">
+        <input type="radio" :id="id('rows')" value="rows" v-model="layout"><label :for="id('rows')" v-bind:class="{ active: layout == 'rows'}">Rows</label>
+        <input type="radio" :id="id('cols')" value="cols" v-model="layout"><label :for="id('cols')" v-bind:class="{ active: layout == 'cols'}">Columns</label>
       </span>
     </fieldset>
     <!-- 2x1 GRID -->
-    <div v-if="view!= 'framed'" class="form layout" v-bind:class="{
+    <div v-if="view!='framed'" class="form layout" v-bind:class="{
         rows:    layout == 'rows' && view!= 'rdf',
         columns: layout == 'cols' || view== 'rdf'
     }">
       <div class="cell">
         <label :for="id('jsonldInput')">{{inputLabel}}</label>
-        <textarea :id="id('jsonldInput')"name="value" autocomplete="true" v-model="jsonldInput"></textarea>
+        <textarea :id="id('jsonldInput')" name="value" autocomplete="true" v-model="jsonldInput"></textarea>
       </div>
       <div class="cell">
         <label :for="id('output')">Output</label>
@@ -57,11 +57,11 @@
     <div v-else="view== 'framed'" class="form layout columns">
       <div class="cell">
         <label :for="id('jsonldInput')">{{inputLabel}}</label>
-        <textarea :id="id('jsonldInput')"name="value" v-model="jsonldInput"></textarea>
+        <textarea :id="id('jsonldInput')" name="value" v-model="jsonldInput"></textarea>
       </div>
       <div class="cell">
         <label :for="id('jsonldFrame')">{{frameLabel}}</label>
-        <textarea :id="id('jsonldFrame')"name="frame" v-model="jsonldFrame"></textarea>
+        <textarea :id="id('jsonldFrame')" name="frame" v-model="jsonldFrame"></textarea>
       </div>
       <div class="cell">
         <label :for="id('jsonldInput2')">{{inputLabel2}}</label>
@@ -69,7 +69,7 @@
       </div>
       <div class="cell">
         <label :for="id('output')">{{outputLabel}}</label>
-        <textarea :id="id('output')"name="jsonld" wrap="off" readonly :value="output"></textarea>
+        <textarea :id="id('output')" name="jsonld" wrap="off" readonly :value="output"></textarea>
       </div>
     </div>
     <!-- FOOTER -->
