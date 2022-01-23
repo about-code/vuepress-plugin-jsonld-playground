@@ -7,6 +7,15 @@
   border-radius: 0.75rem;
   background: #f3f5f7;
 }
+.dark .comp {
+  color: #adbac7;
+  background: #22272e;
+}
+.comp code {
+  color: white;
+  background: none;
+}
+
 /* Layout */
 .layout {
   display: grid;
@@ -39,6 +48,7 @@
   border-top-right-radius: inherit;
   padding: 0.5rem;
   color:#FFF;
+  line-height: 1.5rem;
 }
 .valid {
   background: #42b983; /* rgb(200, 255, 193);*/
@@ -50,9 +60,6 @@
   color: white;
   text-decoration: underline;
 }
-.valid code {
-  color: white;
-}
 
 /* Toolbar */
 .toolbar {
@@ -62,6 +69,7 @@
   color: #FFFF;
   border-radius: 0 0 0.75rem 0.75rem;
   background-color: #5b6c7e;
+  line-height: 1.5rem;
 }
 .toolbar input[type=radio] {
   display:none;
@@ -94,7 +102,8 @@ textarea {
   width: 100%;
   padding:15px 0 0 15px;
   margin:0px;
-  border: none;
+  border: 1px solid #AAA;
+
   /*
   Textarea padding without scrollbar offsets causing overlaps
   https://stackoverflow.com/questions/271067/how-can-i-make-a-textarea-100-width-without-overflowing-when-padding-is-present#
@@ -113,6 +122,10 @@ textarea {
 textarea:read-only {
   background: #DDD;
 }
+.dark textarea:read-only {
+  background: #3e4c5a;
+}
+
 .button {
   border: 1px solid #FFF;
   border-radius: 0.5rem;
@@ -131,7 +144,7 @@ textarea:read-only {
   margin: 0px;
   font-size: 0.8rem;
   border-bottom: 1px solid #AAA;
-  background: white;
+  /* background: white; */
 }
 .comp table .small {
   width: 0.75rem;
