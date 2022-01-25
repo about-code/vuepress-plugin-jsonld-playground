@@ -2,11 +2,8 @@ const jsonld = require("jsonld");
 const _ = require("lodash");
 
 module.exports = {
+  name: "JsonLd",
   props: {
-    "view": {
-      type: String,
-      default: "compacted"
-    },
     "inputLabel": {
       type: String,
       default: "JSON-LD Document"
@@ -27,6 +24,7 @@ module.exports = {
   data() {
     return {
       cid: `${Math.random()}`.replace("0.", ""),
+      view: "compacted",
       layout: "cols",
       message: "",
       jsonldInput: "{}",
@@ -38,12 +36,13 @@ module.exports = {
   },
   mounted() {
     const me = this;
-    me.jsonldInput  = fromSlot(me.$slots.default) || "{}";
-    me.jsonldInput2 = fromSlot(me.$slots.doc2) || "{}";
-    me.jsonldFrame  = fromSlot(me.$slots.frame) || "{}";
+    me.jsonldInput  = fromSlot(me.$slots.default, me) || "{}";
+    me.jsonldInput2 = fromSlot(me.$slots.doc2, me) || "{}";
+    me.jsonldFrame  = fromSlot(me.$slots.frame, me) || "{}";
     me.formatInput();
   },
   created() {
+    // this.processDebounced = debounce(this.process, this, 500);
     this.processDebounced = _.debounce(this.process, 500);
   },
   watch: {
@@ -115,9 +114,19 @@ module.exports = {
   }
 };
 
-function fromSlot(strArray) {
-  return strArray?.filter(e => !!e.text)
-      .map(e => e.text)
+function fromSlot(slot, slotThisScope) {
+  let strArray = [];
+  if (typeof slot === "function") {
+    // vuepress 2.x
+    strArray = slot.call(slotThisScope);
+  } else {
+    // vuepress 1.x backwards compatibility;
+    strArray = (slot || []).map(slot => {
+      return { children: slot.text };
+    });
+  }
+  return strArray.filter(e => !!e.children)
+      .map(e => e.children)
       .reduce((prev, curr) => {
         return prev + curr;
       }, "")

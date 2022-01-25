@@ -7,18 +7,20 @@
     "changelog": "standard-version --dry-run",
     "v:alpha": "standard-version --prerelease alpha",
     "v:beta": "standard-version --prerelease beta",
-    "v:release": "standard-version"
+    "v:release": "standard-version",
+    "deploy": "sh deploy.sh"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/about-code/vuepress-plugin-jsonld-playground.git"
   },
   "dependencies": {
-    "jsonld": "^5.2.0"
+    "jsonld": "^5.2.0",
+    "lodash": "^4.17.21"
   },
   "peer-dependencies": {
-    "vue": "^2.1.0",
-    "vuepress": "^v1.0.0"
+    "vue": ">=2.1.0 <4.0.0",
+    "vuepress": ">=1.0.0 <3.0.0"
   },
   "files": [
     "src",
