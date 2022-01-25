@@ -1,6 +1,6 @@
 {
   "name": "vuepress-plugin-jsonld-playground",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "A JSON-LD Playground component for vuepress (v1) and vuejs (v2).",
   "main": "index.js",
   "scripts": {
